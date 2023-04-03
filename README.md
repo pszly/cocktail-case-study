@@ -35,7 +35,7 @@
 
   In order to run/execute the solution the following dependencies need to be considered and resolved:
   
-  The script was developed in Python version 3.10.10. Check if you have the same version (or higher) in your environment or find an applicable online environment to run the script.
+  * The script was developed in Python version 3.10.10. Check if you have the same version (or higher) in your environment or find an applicable online environment to run the script.
   
   * Checking the python version in your environment can be managed with the following command:
         
@@ -54,14 +54,14 @@
     
     `sqlite3`
     
-    <b>NOTE:</b> Please be aware that `requests` is a non standard python library you need to install it separately see the [Installing](#installing) section below.
+    <b>NOTE:</b> Please be aware that `requests` is a non standard python library you need to install it separately, see the [Installing](#installing) section below.
 
 
 
 ### Installing
 
   * Download the [cocktail_case_study.py](https://github.com/pszly/meinestadt-case-study/blob/meinestadt-case-study/cocktail_case_study.py) file on your computer.
-  * Make sure to install `requests` library in python w/ pip. In case you don't have pip installed on your environment refer the official [pip documentation](https://pip.pypa.io/en/stable/installation/). This project uses `requests` library [version 2.28.2](https://pypi.org/project/requests/2.28.2/).
+  * Make sure to install `requests` library in python w/ `pip`. In case you don't have `pip` installed on your environment refer the official [pip documentation](https://pip.pypa.io/en/stable/installation/). This project uses `requests` library [version 2.28.2](https://pypi.org/project/requests/2.28.2/). To install this specific version run the below command:
     
         $ python -m pip install requests==2.28.2
 
@@ -71,7 +71,7 @@
 
    Run the program with the following command in command line:
   
-  * Locate cocktail_case_study.py file in command line then run the followin command in the parent folder.
+  * Locate cocktail_case_study.py file in command line then run the following command:
 
          $ python cocktail_case_study.py
 
