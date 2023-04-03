@@ -13,9 +13,6 @@ import sqlite3
 
 # 1. "Create a python script which downloads as much drinks as possible from following page: https://www.thecocktaildb.com/api.php"
 
-
-fp = open('sales.txt', 'x')
-
 generateAlphabet = list(string.ascii_lowercase)   
 print(f'_____________________________________________________________________\r\n\n Generated API call parameters (to fetch all available cocktails from https://www.thecocktaildb.com/):\r\n {generateAlphabet}\r\n_____________________________________________________________________\r\n')
 
