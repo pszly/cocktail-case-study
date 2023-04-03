@@ -11,6 +11,9 @@ import pprint
 import random
 import sqlite3
 
+
+
+
 # 1. "Create a python script which downloads as much drinks as possible from following page: https://www.thecocktaildb.com/api.php"
 
 generateAlphabet = list(string.ascii_lowercase)   
@@ -40,6 +43,7 @@ for p in generateAlphabet:
 
     except Exception as e:
         print(f'Error occurred: {e}')
+
 
 
 
@@ -83,6 +87,7 @@ pprint.pprint(cleanDataset[random.randint(0, len(cleanDataset))])
 
 
 
+
 # 2. "Create a relational database in sqlite for the downloaded data, under the assumption that your database could grow to over 10 million datasets."
 
 '''
@@ -99,12 +104,30 @@ print(parsedKeys)
 
 connectSQLite = sqlite3.connect('the_cocktail.db')
 print(f'\r\nDB connection has been established. (the_cocktail.db)\n')
-
 crsr = connectSQLite.cursor()
-crsr.execute("create table if not exists cocktails (drink_id,drink_name,alcoholic,instructions,instructions_de,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15,m1,m2,m3,m4,m5,m6,m7,m8,m9,m10,m11,m12,m13,m14,m15)")
-crsr.executemany("insert into cocktails values (:idDrink,:strDrink,:strAlcoholic,:strInstructions,:strInstructionsDE,:strIngredient1,:strIngredient2,:strIngredient3,:strIngredient4,:strIngredient5,:strIngredient6,:strIngredient7,:strIngredient8,:strIngredient9,:strIngredient10,:strIngredient11,:strIngredient12,:strIngredient13,:strIngredient14,:strIngredient15,:strMeasure1,:strMeasure2,:strMeasure3,:strMeasure4,:strMeasure5,:strMeasure6,:strMeasure7,:strMeasure8,:strMeasure9,:strMeasure10,:strMeasure11,:strMeasure12,:strMeasure13,:strMeasure14,:strMeasure15)", cleanDataset)
-crsr.execute("create unique index idx_drink_id on cocktails (drink_id)")
-connectSQLite.commit()
+
+# check if db already exist
+queryTest = (f'select * from sqlite_master where name =\'cocktails\' and type=\'table\'')
+crsr.execute(queryTest)
+resultTest = crsr.fetchone()
+
+if resultTest == None:
+
+    print(f'\r\nThe \'cocktails\' table has been created... (the_cocktail.db)\n')
+    crsr.execute("create table if not exists cocktails (drink_id,drink_name,alcoholic,instructions,instructions_de,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15,m1,m2,m3,m4,m5,m6,m7,m8,m9,m10,m11,m12,m13,m14,m15)")
+    crsr.executemany("insert into cocktails values (:idDrink,:strDrink,:strAlcoholic,:strInstructions,:strInstructionsDE,:strIngredient1,:strIngredient2,:strIngredient3,:strIngredient4,:strIngredient5,:strIngredient6,:strIngredient7,:strIngredient8,:strIngredient9,:strIngredient10,:strIngredient11,:strIngredient12,:strIngredient13,:strIngredient14,:strIngredient15,:strMeasure1,:strMeasure2,:strMeasure3,:strMeasure4,:strMeasure5,:strMeasure6,:strMeasure7,:strMeasure8,:strMeasure9,:strMeasure10,:strMeasure11,:strMeasure12,:strMeasure13,:strMeasure14,:strMeasure15)", cleanDataset)
+    crsr.execute("create unique index idx_drink_id on cocktails (drink_id)")
+    connectSQLite.commit()
+
+else:
+    
+    print(f'\r\nThe \'cocktails\' table has been truncated and reloaded... (the_cocktail.db)\n')
+    crsr.execute("delete from cocktails")
+    crsr.execute("drop index idx_drink_id")
+    crsr.executemany("insert into cocktails values (:idDrink,:strDrink,:strAlcoholic,:strInstructions,:strInstructionsDE,:strIngredient1,:strIngredient2,:strIngredient3,:strIngredient4,:strIngredient5,:strIngredient6,:strIngredient7,:strIngredient8,:strIngredient9,:strIngredient10,:strIngredient11,:strIngredient12,:strIngredient13,:strIngredient14,:strIngredient15,:strMeasure1,:strMeasure2,:strMeasure3,:strMeasure4,:strMeasure5,:strMeasure6,:strMeasure7,:strMeasure8,:strMeasure9,:strMeasure10,:strMeasure11,:strMeasure12,:strMeasure13,:strMeasure14,:strMeasure15)", cleanDataset)
+    crsr.execute("create unique index idx_drink_id on cocktails (drink_id)")
+    connectSQLite.commit()
+
 
 
 
